@@ -5,6 +5,7 @@
  */
 package br.com.senactech.sistemaRH.view;
 import br.com.senactech.sistemaRH.model.turnover;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Marcia
@@ -16,6 +17,27 @@ public class GUITurnover extends javax.swing.JInternalFrame {
      */
     public GUITurnover() {
         initComponents();
+       
+       
+    }
+    
+    public void calcularTO(){
+        turnover to = new turnover();
+        
+        to.setnAd(Integer.parseInt(jtfnadm.getText()));
+        to.setnDem(Integer.parseInt(jtfndemi.getText()));
+        to.setQlMesAnterior(Integer.parseInt(jtfqlt.getText()));
+        
+        JOptionPane.showMessageDialog(null, "O valor total é: " + to.calcularTurnOver());
+        
+        limpar();
+    }
+    
+    public void limpar(){
+        jtfnadm.setText(null);
+        jtfndemi.setText(null);
+         jtfqlt.setText(null);
+        
     }
 
     /**
@@ -146,10 +168,11 @@ public class GUITurnover extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbcalctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcalctActionPerformed
-        int dm = Integer.parseInt(jtfndemi.getText());
-        int ad = Integer.parseInt(jtfnadm.getText());
-        int ql = Integer.parseInt(jtfqlt.getText());
+        //int dm = Integer.parseInt(jtfndemi.getText());
+        //int ad = Integer.parseInt(jtfnadm.getText());
+        //int ql = Integer.parseInt(jtfqlt.getText());
         
+        calcularTO();
         
         
         

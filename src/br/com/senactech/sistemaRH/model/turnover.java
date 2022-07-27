@@ -46,6 +46,13 @@ public class turnover {
         this.qlMesAnterior = qlMesAnterior;
     }
 
+    
+    public int calcularTurnOver(){
+        int valorTotal = 0;
+        valorTotal = (nAd + nDem/2)/ qlMesAnterior;
+        return valorTotal;
+    }
+        
     @Override
     public String toString() {
         return "turnover{" + "nAd=" + nAd + ", nDem=" + nDem + ", qlMesAnterior=" + qlMesAnterior + '}';

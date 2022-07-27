@@ -4,6 +4,7 @@ package br.com.senactech.sistemaRH.view;
 
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
+import br.com.senactech.sistemaRH.model.turnover;
 
 
 

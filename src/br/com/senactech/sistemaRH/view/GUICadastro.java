@@ -5,6 +5,14 @@
  */
 package br.com.senactech.sistemaRH.view;
 
+import br.com.senactech.sistemaRH.model.usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import br.com.senactech.sistemaRH.sistemaRHDAO.usuarioDAO;
+import br.com.senactech.sistemaRH.sistemaRHDAO.DaoFactory;
+
 /**
  *
  * @author Marcia
@@ -41,6 +49,8 @@ public class GUICadastro extends javax.swing.JInternalFrame {
         jtfsenhacad = new javax.swing.JTextField();
         jbcad = new javax.swing.JButton();
         jbsaircad = new javax.swing.JButton();
+        jlcpf = new javax.swing.JLabel();
+        jtfCPF = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -55,6 +65,12 @@ public class GUICadastro extends javax.swing.JInternalFrame {
 
         jlblnome.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jlblnome.setText("Nome:");
+
+        jtfnome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfnomeActionPerformed(evt);
+            }
+        });
 
         jlblsetor.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jlblsetor.setText("Setor:");
@@ -78,6 +94,8 @@ public class GUICadastro extends javax.swing.JInternalFrame {
 
         jbsaircad.setText("Sair");
 
+        jlcpf.setText("CPF:");
+
         jdpCadastro.setLayer(jblTitulo2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdpCadastro.setLayer(jlbIdPessoa, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdpCadastro.setLayer(jtfIdPessoaCad, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -90,6 +108,8 @@ public class GUICadastro extends javax.swing.JInternalFrame {
         jdpCadastro.setLayer(jtfsenhacad, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdpCadastro.setLayer(jbcad, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdpCadastro.setLayer(jbsaircad, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdpCadastro.setLayer(jlcpf, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdpCadastro.setLayer(jtfCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jdpCadastroLayout = new javax.swing.GroupLayout(jdpCadastro);
         jdpCadastro.setLayout(jdpCadastroLayout);
@@ -101,34 +121,37 @@ public class GUICadastro extends javax.swing.JInternalFrame {
                         .addGap(112, 112, 112)
                         .addComponent(jblTitulo2))
                     .addGroup(jdpCadastroLayout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jbcad)
+                        .addGap(27, 27, 27)
+                        .addComponent(jbsaircad))
+                    .addGroup(jdpCadastroLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jdpCadastroLayout.createSequentialGroup()
-                                .addComponent(jlblnome)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtfnome, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jdpCadastroLayout.createSequentialGroup()
-                                .addComponent(jlbIdPessoa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfIdPessoaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdpCadastroLayout.createSequentialGroup()
+                        .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jdpCadastroLayout.createSequentialGroup()
+                                    .addComponent(jlbIdPessoa)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfIdPessoaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jdpCadastroLayout.createSequentialGroup()
+                                    .addComponent(jlblnome)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jtfnome, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jdpCadastroLayout.createSequentialGroup()
+                                    .addComponent(jlcpf)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jdpCadastroLayout.createSequentialGroup()
                                     .addComponent(jlblsetor)
                                     .addGap(18, 18, 18)
                                     .addComponent(jrbrh)
-                                    .addGap(32, 32, 32)
+                                    .addGap(18, 18, 18)
                                     .addComponent(jrbnrh))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdpCadastroLayout.createSequentialGroup()
+                                .addGroup(jdpCadastroLayout.createSequentialGroup()
                                     .addComponent(jlbsenhacad)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpCadastroLayout.createSequentialGroup()
-                                            .addGap(0, 0, Short.MAX_VALUE)
-                                            .addComponent(jbcad)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jbsaircad)
-                                            .addGap(25, 25, 25))
-                                        .addComponent(jtfsenhacad)))))))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jtfsenhacad, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         jdpCadastroLayout.setVerticalGroup(
@@ -146,18 +169,22 @@ public class GUICadastro extends javax.swing.JInternalFrame {
                     .addComponent(jtfnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlcpf)
+                    .addComponent(jtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblsetor)
                     .addComponent(jrbrh)
                     .addComponent(jrbnrh))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlbsenhacad)
-                    .addComponent(jtfsenhacad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jtfsenhacad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbsenhacad))
+                .addGap(27, 27, 27)
                 .addGroup(jdpCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbcad)
                     .addComponent(jbsaircad))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,7 +203,59 @@ public class GUICadastro extends javax.swing.JInternalFrame {
 
     private void jbcadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcadActionPerformed
         // TODO add your handling code here:
+         usuario usu = new usuario();
+        usu.setNome(jtfnome.getText());
+        usu.setCpf(jtfCPF.getText());
+        usu.setSenha(jtfsenhacad.getText());
+        boolean doc = false;
+
+        int tUsuario = 0;
+        if (jrbCpf.isSelected() && !jrbCnpj.isSelected()) {
+            tPessoa = 1;
+        } else if (!jrbCpf.isSelected() && jrbCnpj.isSelected()) {
+            tPessoa = 2;
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione tipo de cliente.");
+        }
+        cliente cliCpfCnpj;
+        cliCpfCnpj = cadClientes.pesqCli(tPessoa, jtfCpfCnpj.getText());
+        if (jrbCpf.isSelected() && cliCpfCnpj.getCpf() == null) {
+            cli.setCpf(jtfCpfCnpj.getText());
+            cli.setCnpj(null);
+            doc = false;
+        } else if (jrbCnpj.isSelected() && cliCpfCnpj.getCnpj() == null) {
+            cli.setCpf(null);
+            cli.setCnpj(jtfCpfCnpj.getText());
+            doc = false;
+        }
+        if (cadClientes.verificaCliente(cliCpfCnpj.getIdCliente())) {
+            JOptionPane.showMessageDialog(this, "Este documento já existe!"
+                    + "\nTente novamente!!!");
+            doc = true;
+        }
+        //Cadastro a partir das validações
+        if ((jrbCpf.isSelected() || jrbCnpj.isSelected()) && !doc && !jtfNomeCliente.getText().isEmpty() && !jtfCpfCnpj.getText().isEmpty()) {
+            cli.setIdCliente(cadClientes.addIdCli());
+            //cadClientes.addCliente(cli);
+            clienteServices cliS = servicesFactory.getclienteServices();
+            try {
+                cliS.cadClienteBD(cli);
+            } catch (SQLException ex) {
+                Logger.getLogger(jfCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            addRowToTable();
+            jbLimpar.doClick();
+            JOptionPane.showMessageDialog(this, cli.getNomeCliente() + " cadastrado com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Cadastro incompleto.");
+        }
+        
+    
     }//GEN-LAST:event_jbcadActionPerformed
+
+    private void jtfnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfnomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfnomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -189,10 +268,14 @@ public class GUICadastro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlblnome;
     private javax.swing.JLabel jlblsetor;
     private javax.swing.JLabel jlbsenhacad;
+    private javax.swing.JLabel jlcpf;
     private javax.swing.JRadioButton jrbnrh;
     private javax.swing.JRadioButton jrbrh;
+    private javax.swing.JTextField jtfCPF;
     private javax.swing.JTextField jtfIdPessoaCad;
     private javax.swing.JTextField jtfnome;
     private javax.swing.JTextField jtfsenhacad;
     // End of variables declaration//GEN-END:variables
+
 }
+

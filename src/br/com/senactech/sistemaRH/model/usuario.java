@@ -13,12 +13,13 @@ public class usuario {
     private int idUsuario;
     private String nome;
     private String setor;
-    private int senha;
+    private String senha;
+    private String cpf;
 
     public usuario() {
     }
 
-    public usuario(int idUsuario, String nome, String setor, int senha) {
+    public usuario(int idUsuario, String nome, String setor, String senha, String cpf) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.setor = setor;
@@ -49,13 +50,23 @@ public class usuario {
         this.setor = setor;
     }
 
-    public int getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(int senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    
     
     
     
