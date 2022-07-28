@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package br.com.senactech.sistemaRH.view;
-
+import br.com.senactech.sistemaRH.model.horaExtra;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Marcia
@@ -16,6 +17,25 @@ public class GUIHe extends javax.swing.JInternalFrame {
      */
     public GUIHe() {
         initComponents();
+    }
+    
+    public void calcularhe(){
+        horaExtra he = new horaExtra();
+        
+        he.setValorHoraExtra(Integer.parseInt(jtfquanthe.getText()));
+        he.setValorQuadroLotacao(Integer.parseInt(jtfqlhe.getText()));
+       
+        
+        JOptionPane.showMessageDialog(null, "O valor total é: " + he.calcularHoraExtra());
+        
+        limpar();
+    }
+    
+    public void limpar(){
+        jtfqlhe.setText(null);
+        jtfquanthe.setText(null);
+         
+        
     }
 
     /**
@@ -50,6 +70,11 @@ public class GUIHe extends javax.swing.JInternalFrame {
         jlblqlhe.setText("Quadro de Lotação:");
 
         jbhe.setText("Calcular");
+        jbhe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbheActionPerformed(evt);
+            }
+        });
 
         jbsairhe.setText("Sair");
 
@@ -121,6 +146,10 @@ public class GUIHe extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbheActionPerformed
+        calcularhe();
+    }//GEN-LAST:event_jbheActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

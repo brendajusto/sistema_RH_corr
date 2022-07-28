@@ -6,13 +6,14 @@
 package br.com.senactech.sistemaRH.view;
 
 import br.com.senactech.sistemaRH.model.usuario;
+import br.com.senactech.sistemaRH.services.servicesFactory;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import br.com.senactech.sistemaRH.sistemaRHDAO.usuarioDAO;
 import br.com.senactech.sistemaRH.sistemaRHDAO.DaoFactory;
-
+import br.com.senactech.sistemaRH.services.usuarioServices;
 /**
  *
  * @author Marcia
@@ -202,59 +203,32 @@ public class GUICadastro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbcadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcadActionPerformed
-        // TODO add your handling code here:
-         usuario usu = new usuario();
-        usu.setNome(jtfnome.getText());
-        usu.setCpf(jtfCPF.getText());
-        usu.setSenha(jtfsenhacad.getText());
-        boolean doc = false;
+      cadUsuario();  
 
-        int tUsuario = 0;
-        if (jrbCpf.isSelected() && !jrbCnpj.isSelected()) {
-            tPessoa = 1;
-        } else if (!jrbCpf.isSelected() && jrbCnpj.isSelected()) {
-            tPessoa = 2;
-        }else{
-            JOptionPane.showMessageDialog(this, "Selecione tipo de cliente.");
-        }
-        cliente cliCpfCnpj;
-        cliCpfCnpj = cadClientes.pesqCli(tPessoa, jtfCpfCnpj.getText());
-        if (jrbCpf.isSelected() && cliCpfCnpj.getCpf() == null) {
-            cli.setCpf(jtfCpfCnpj.getText());
-            cli.setCnpj(null);
-            doc = false;
-        } else if (jrbCnpj.isSelected() && cliCpfCnpj.getCnpj() == null) {
-            cli.setCpf(null);
-            cli.setCnpj(jtfCpfCnpj.getText());
-            doc = false;
-        }
-        if (cadClientes.verificaCliente(cliCpfCnpj.getIdCliente())) {
-            JOptionPane.showMessageDialog(this, "Este documento já existe!"
-                    + "\nTente novamente!!!");
-            doc = true;
-        }
-        //Cadastro a partir das validações
-        if ((jrbCpf.isSelected() || jrbCnpj.isSelected()) && !doc && !jtfNomeCliente.getText().isEmpty() && !jtfCpfCnpj.getText().isEmpty()) {
-            cli.setIdCliente(cadClientes.addIdCli());
-            //cadClientes.addCliente(cli);
-            clienteServices cliS = servicesFactory.getclienteServices();
-            try {
-                cliS.cadClienteBD(cli);
-            } catch (SQLException ex) {
-                Logger.getLogger(jfCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            addRowToTable();
-            jbLimpar.doClick();
-            JOptionPane.showMessageDialog(this, cli.getNomeCliente() + " cadastrado com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Cadastro incompleto.");
-        }
-        
     
     }//GEN-LAST:event_jbcadActionPerformed
 
+    public void cadUsuario() {
+       usuario us = new usuario();
+       us.setNome(jtfnome.getText());
+       us.setCpf(jtfCPF.getText());
+       us.setIdUsuario(Integer.parseInt(jtfIdPessoaCad.getText()));
+       us.setSenha(jtfsenhacad.getText());
+      
+        try {
+         usuarioServices uss = servicesFactory.getusuarioServices();
+       uss.cadUsuarioBD(us);   
+        } catch (SQLException e) {
+          JOptionPane.showMessageDialog(null, "Erro ao cadastrar" + e.getMessage());  
+          
+        } finally{
+            
+            JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!" + us.getNome());
+        }
+    }
+    
     private void jtfnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfnomeActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jtfnomeActionPerformed
 
 
@@ -278,4 +252,6 @@ public class GUICadastro extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 }
+
+
 

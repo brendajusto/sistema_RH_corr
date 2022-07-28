@@ -24,10 +24,10 @@ public class usuarioDAO {
         
         try {
             String sql;
-            sql = "insert into usuario values (null, '"
+            sql = "insert into usuariorh values (null, '"
                     + uVO.getNome()+ "', '"
                     + uVO.getSetor()+ "', '"
-                    + uVO.getSenha()+ ");";
+                    + uVO.getSenha()+ "');";
 
             sta.execute(sql);
 

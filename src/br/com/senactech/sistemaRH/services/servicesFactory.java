@@ -11,6 +11,7 @@ package br.com.senactech.sistemaRH.services;
  */
 public class servicesFactory {
     private static usuarioServices UsuarioServices = new usuarioServices();
+    //private static horaextraServices heServices = new horaextraService();
     
     public static usuarioServices getusuarioServices(){
         return UsuarioServices;

@@ -14,9 +14,9 @@ import java.sql.Connection;
  */
 public class conexao {
     
-    private static String url = "jdbc:mysql://mysql746.umbler.com:41890/devn211";
-    private static String user = "devn211";
-    private static String pass = "devn211senac";
+    private static String url = "jdbc:mysql://localhost:3306/devn211";
+    private static String user = "root";
+    private static String pass = "";
 
   
 

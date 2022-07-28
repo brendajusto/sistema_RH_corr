@@ -5,9 +5,15 @@ package br.com.senactech.sistemaRH.view;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import br.com.senactech.sistemaRH.model.turnover;
-
-
-
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import br.com.senactech.sistemaRH.services.usuarioServices;
+import br.com.senactech.sistemaRH.services.servicesFactory;
+import br.com.senactech.sistemaRH.model.usuario;
 
 /**
  *
@@ -149,6 +155,8 @@ public class GUIPrincipal extends javax.swing.JFrame implements InternalFrameLis
             jdpPrincipal.add(menu);
             menu.setVisible(true);
         }
+        
+       
     }//GEN-LAST:event_jbentrarActionPerformed
 
     private void jbCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastroActionPerformed

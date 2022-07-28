@@ -37,6 +37,13 @@ public class horaExtra {
     public void setValorQuadroLotacao(int valorQuadroLotacao) {
         this.valorQuadroLotacao = valorQuadroLotacao;
     }
+    
+    public int calcularHoraExtra(){
+       int calhoraextra = 0;
+       calhoraextra = valorHoraExtra / valorQuadroLotacao;
+       return calhoraextra;
+        
+    }
 
     @Override
     public String toString() {
